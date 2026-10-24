@@ -24,7 +24,8 @@ export default function Home() {
     if (files) Array.from(files).forEach(file => body.append("documents", file));
     try {
       if (!API) throw new Error("Backend URL missing. Set NEXT_PUBLIC_API_URL in Vercel Project Settings → Environment Variables, then redeploy.");
-      const response = await fetch(`${API.replace(/\\/$/, "")}/api/verify`, { method: "POST", body });
+      const baseUrl = API.endsWith("/") ? API.slice(0, -1) : API;
+      const response = await fetch(`${baseUrl}/api/verify`, { method: "POST", body });
       if (!response.ok) throw new Error("Backend returned an error. Check that the FastAPI server is running.");
       setResult(await response.json());
     } catch (err) { setError(err instanceof Error ? err.message : "Backend se connect nahi ho pa raha. Check the backend URL and Render logs."); }
