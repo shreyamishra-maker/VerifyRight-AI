@@ -4,7 +4,7 @@ import { ShieldCheck, Building2, FileCheck2, ClipboardList, UploadCloud, SearchC
 
 type Finding = { severity: string; title: string; detail: string };
 type Result = { application_id: string; institution_name: string; status: string; uploaded_documents: string[]; summary: string; findings: Finding[]; disclaimer: string };
-const API = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Home() {
   const [institution, setInstitution] = useState("Shakti Institute of Technology");
@@ -23,10 +23,11 @@ export default function Home() {
     body.append("faculty_count", faculty); body.append("lab_count", labs); body.append("equipment_count", equipment);
     if (files) Array.from(files).forEach(file => body.append("documents", file));
     try {
-      const response = await fetch(`${API}/api/verify`, { method: "POST", body });
+      if (!API) throw new Error("Backend URL missing. Set NEXT_PUBLIC_API_URL in Vercel Project Settings → Environment Variables, then redeploy.");
+      const response = await fetch(`${API.replace(/\\/$/, "")}/api/verify`, { method: "POST", body });
       if (!response.ok) throw new Error("Backend returned an error. Check that the FastAPI server is running.");
       setResult(await response.json());
-    } catch { setError("Backend se connect nahi ho pa raha. Pehle backend start karo: http://127.0.0.1:8000"); }
+    } catch (err) { setError(err instanceof Error ? err.message : "Backend se connect nahi ho pa raha. Check the backend URL and Render logs."); }
     finally { setLoading(false); }
   }
 
