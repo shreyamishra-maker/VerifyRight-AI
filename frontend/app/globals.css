@@ -135,3 +135,155 @@ label:has(input[type="file"]:focus-visible) {
     box-shadow: none !important;
   }
 }
+
+
+/* Mobile-first refinements for small screens */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+main {
+  width: 100%;
+  min-width: 0;
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  main > header > div {
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  main > header > div > div:first-child {
+    min-width: 0;
+    gap: 9px;
+  }
+
+  main > header > div > div:first-child > div:last-child {
+    min-width: 0;
+  }
+
+  main > header > div > div:first-child > div:last-child > div:first-child {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  main > header > div > div:first-child > div:last-child > div:last-child {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  main > header > div > div:last-child {
+    flex-shrink: 0;
+    padding: 7px 9px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  main > div {
+    gap: 18px !important;
+    padding: 16px 14px 24px !important;
+  }
+
+  main > div > aside {
+    min-width: 0;
+  }
+
+  main > div > aside > div:first-child {
+    margin-bottom: 8px;
+    padding-left: 2px;
+  }
+
+  main > div > aside > button {
+    min-height: 44px;
+  }
+
+  main > div > section {
+    min-width: 0;
+    gap: 18px;
+  }
+
+  main h1 {
+    overflow-wrap: anywhere;
+    font-size: clamp(1.6rem, 7vw, 2rem);
+    line-height: 1.15;
+  }
+
+  main h2 {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  main section > div:first-child {
+    min-width: 0;
+  }
+
+  main section > div:first-child > div:last-child {
+    width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  main form,
+  main section section,
+  main section > div {
+    min-width: 0;
+  }
+
+  .field {
+    min-height: 46px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  input[type="file"] {
+    max-width: 100%;
+  }
+
+  button {
+    min-height: 42px;
+  }
+
+  main form,
+  main section .rounded-2xl {
+    overflow-wrap: anywhere;
+  }
+
+  main section .grid {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  main > header > div {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  main > header > div > div:last-child {
+    padding: 6px 7px;
+    font-size: 9px;
+  }
+
+  main > div {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+}
